@@ -11,13 +11,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Transaction.belongsTo(models.Menu, { foreignKey: 'menuId' }); 
       Transaction.belongsTo(models.User, { foreignKey: 'userId' }); 
+      Transaction.hasMany(models.Cart, {foreignKey: 'transactionId', as: "menuIdAlias"})
+      Transaction.belongsToMany(models.Menu, {through: "Carts", foreignKey: 'menuId', as: "MenuIdAlias"})
     }
   }
   Transaction.init({
-    userId: DataTypes.INTEGER,
-    menuId: DataTypes.INTEGER
+    userId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      validate: {
+        notNull: {
+          msg: "UserId can't be null",
+        },
+        notEmpty: {
+          msg: "UserId can't be empty",
+        },
+      },
+    },
   }, {
     sequelize,
     modelName: 'Transaction',

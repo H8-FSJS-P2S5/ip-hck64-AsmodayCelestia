@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Menu.belongsTo(models.Category, { foreignKey: 'categoryId' }); 
-      Menu.hasMany(models.Transaction, {foreignKey: 'menuId', as: "menuIdAlias"})
-      Menu.belongsToMany(models.User, {through: "Transactions", foreignKey: 'menuId', as: "MenuIdAlias"})
+      Menu.hasMany(models.Cart, {foreignKey: 'menuId', as: "menuIdAlias"})
+      Menu.belongsToMany(models.Transaction, {through: "Carts", foreignKey: 'menuId', as: "MenuIdAlias"})
     }
   }
   Menu.init({
