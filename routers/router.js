@@ -13,6 +13,7 @@ const authentication = require('../middlewares/authentication')
 
 router.get('/', Controller.allMenu)
 router.post('/login', Controller.login)
+router.post('/register', Controller.register)
 router.use(authentication)
 //   router.get('/pub/articles', Controller.allArticles)
 //   router.get('/pub/articles/:id', Controller.articles)
