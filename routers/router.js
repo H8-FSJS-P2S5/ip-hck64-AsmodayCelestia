@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Controller = require('../controllers/controller')
 const authentication = require('../middlewares/authentication')
-const {fetchData} = require('../middlewares/fetchData')
+
 
 // router.get('/rajaongkir', rajaongkir, async (req, res, next) => {
 //     console.log(req.menu);
@@ -10,13 +10,8 @@ const {fetchData} = require('../middlewares/fetchData')
 // // res.status(200).json({message: 'Hello World'})
 // })
 
-router.use(fetchData)
-router.get('/', async (req, res, next) => {
-        console.log(req.menu);
-        res.send(req.menu);
-    // res.status(200).json({message: 'Hello World'})
-})
 
+router.get('/', Controller.allMenu)
 router.use(authentication)
 //   router.get('/pub/articles', Controller.allArticles)
 //   router.get('/pub/articles/:id', Controller.articles)

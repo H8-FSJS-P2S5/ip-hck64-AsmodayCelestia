@@ -9,16 +9,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      breakfast: {
-        type: Sequelize.STRING
-      },
-      lunch: {
-        type: Sequelize.STRING
-      },
-      dinner: {
-        type: Sequelize.STRING
-      },
-      drink: {
+      name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {
