@@ -25,9 +25,6 @@ async function authentication(req, res, next) {
             id: findUser.id,
             username: findUser.username,
             email: findUser.email,
-            role: findUser.role,
-            phoneNumber: findUser.phoneNumber,
-            address: findUser.address
         }
         console.log(req.user.id);
         next()
