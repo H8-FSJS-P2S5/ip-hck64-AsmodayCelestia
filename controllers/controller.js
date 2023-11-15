@@ -61,6 +61,36 @@ class Controller{
             next(error)
         }
     }
+
+    static async login(req, res, next){
+        try {
+            const {email, password} = req.body
+            if(!email){
+                res.status(404).json({message: "Email is required"})
+            }
+            if(!password){
+                res.status(404).json({message: "Password is required"})
+            }
+            const user = await User.findOne({where:{email}})
+            console.log(user);
+            if(!user){
+                res.status(404).json({message: "Invalid email/password"})
+            }
+            if(!user){
+                res.status(401).json({message: "Invalid email/password"})
+            }
+            const compare = comparePassword(password, user.password)
+            if(!compare){
+                res.status(401).json({message: "Invalid email/password"})
+            }
+            const access_token = signToken({id:user.id})
+            // console.log(access_token);
+            res.status(200).json({Authorization: `Bearer ${access_token}`})
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({message: "Internal Server Error"})
+        }
+    }
 }
 
 module.exports = Controller 
