@@ -3,6 +3,8 @@ const {comparePassword} = require('../helpers/bcrypt')
 const {signToken} = require('../helpers/jwt')
 const { Op } = Sequelize;
 const axios = require('axios')
+const {OAuth2Client} = require('google-auth-library');
+const client = new OAuth2Client();
 
 class Controller{
 
@@ -76,7 +78,7 @@ class Controller{
                 })
                 const role = user.role
                 // const userid = payload['sub'];
-                res.status(201).json({access_token, role})
+                res.status(201).json({Authorization: `Bearer ${access_token}`})
         }catch(error){
             // console.log(error);
             next(error);
